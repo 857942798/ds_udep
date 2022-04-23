@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<udep:root xmlns:udep="http://www.udep.com/udep"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.udep.com/udep /udep/udep-config.xsd">
+
+  <udep:tableInfo id="a_student" opCode="12" dbName="default">
+        select * from a_student where id=#{id}
+  </udep:tableInfo>
+
+
+    <udep:tableInfo id="a_student_23" opCode="11" dbName="default">
+        select * from a_student where id=#{id}
+    </udep:tableInfo>
+
+</udep:root>

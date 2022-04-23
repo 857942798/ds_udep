@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd   ">
+
+    <context:component-scan base-package="com.ais.udep"/>
+    <!--根据数据库类型，从指定文件目录udep/oracle/*下读取sql配置文件-->
+    <bean id="dbConfig" class="com.ais.udep.server.config.DbConfig">
+        <property name="xmlReadPath" value="oracle"/>
+    </bean>
+
+    <!--配置数据源-->
+    <bean id="udepDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${udep.oracle.jdbc.driver}"></property>
+        <property name="url" value="${udep.oracle.jdbc.url}"></property>
+        <property name="username" value="${udep.oracle.jdbc.username}"></property>
+        <property name="password" value="${udep.oracle.jdbc.password}"></property>
+        <property name="initialSize" value="${udep.oracle.jdbc.initPoolSize}"></property>
+        <property name="maxActive" value="${udep.oracle.jdbc.maxPoolSize}"></property>
+    </bean>
+
+    <!--配置jdbc模板-->
+    <bean id="udepJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="udepDataSource"></property>
+    </bean>
+
+    <!--配置jdbcPool模板-->
+    <bean id="udepJdbcTemplatePool" class="com.ais.udep.server.config.UdepJdbcTemplatePool">
+        <property name="udepJdPool">
+            <map>
+                <entry>
+                    <key>
+                        <value>default</value>
+                    </key>
+                    <ref bean="udepJdbcTemplate"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+</beans>
