@@ -17,11 +17,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.ais.csmf</groupId>
-            <artifactId>csmf-core</artifactId>
-            <version>6.1.3-RELEASE</version>
-        </dependency>
-        <dependency>
             <groupId>com.ais.udep</groupId>
             <artifactId>udep-server</artifactId>
             <version>${project.version}</version>
